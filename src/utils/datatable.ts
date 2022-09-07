@@ -5,6 +5,8 @@ import type {
   CheckboxInput,
   DropdownInput,
   RangeInput,
+  CheckboxItem,
+  DropdownItem,
 } from '../models/datatable';
 
 export function isCheckboxInput(
@@ -95,9 +97,9 @@ export const createFilters = <T extends DataTableRecord>(
         };
         if (input?.items.every((item) => item.value !== populatedItem.value)) {
           if (isCheckboxInput(input)) {
-            input.items.push({ ...populatedItem, checked: false });
+            input.items.push({ ...populatedItem, checked: false } as CheckboxItem);
           } else {
-            input.items.push(populatedItem);
+            input.items.push(populatedItem as DropdownItem);
           }
         }
       }

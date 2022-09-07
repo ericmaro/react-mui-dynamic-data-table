@@ -1,4 +1,6 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
+var _utc = require('dayjs/plugin/utc')
+dayjs.extend(_utc)
 
 const DATE_FORMATS = {
   date: 'MMM D, YYYY',
@@ -44,9 +46,11 @@ export function formatDate({
   }
   try {
     if (utc) {
-      return moment(date).utc().format(DATE_FORMATS[formatter]);
+      //todo: dayjs.utc(date).format(DATE_FORMATS[formatter]);
+   
+      return dayjs(date).format(DATE_FORMATS[formatter]);
     }
-    return moment(date).format(DATE_FORMATS[formatter]);
+    return dayjs(date).format(DATE_FORMATS[formatter]);
   } catch {
     return fallback;
   }

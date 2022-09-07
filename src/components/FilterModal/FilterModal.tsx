@@ -12,10 +12,10 @@ import {
   isDropdownInput,
 } from '../../utils/datatable';
 import { RangePicker } from '../RangePicker';
-import { Box, Button, Checkbox, Dialog, Typography } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider/Divider';
-import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import Select from '@material-ui/core/Select/Select';
+import { Box, Button, Checkbox, Dialog, Typography } from '@mui/material';
+import Divider from '@mui/material/Divider/Divider';
+import MenuItem from '@mui/material/MenuItem/MenuItem';
+import Select from '@mui/material/Select/Select';
 import { cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
@@ -110,10 +110,11 @@ const FilterModal = <T extends DataTableRecord>({
       } else if (isDropdownInput(input)) {
         input.selected = null;
       }
+      //todo: remove any
       clearedFilters[column as keyof T] = {
         ...clearedFilters[column],
         input: { ...input },
-      };
+      } as any;
     });
     setSelectedFilters(clearedFilters);
   };

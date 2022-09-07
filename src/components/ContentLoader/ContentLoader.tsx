@@ -1,5 +1,5 @@
-import { CircularProgress, Box } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { CircularProgress, Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React from 'react';
 import type { FC } from 'react';
 
@@ -8,6 +8,7 @@ interface ContentLoaderProps {
    * Indicates whether the loading spinner should be shown instead of the content
    */
   loading: boolean;
+  children: React.ReactNode;
 }
 
 /**

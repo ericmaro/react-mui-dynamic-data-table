@@ -31,9 +31,9 @@ import {
   Tooltip,
   Typography,
   useTheme,
-} from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import { ArrowForward, Search, Edit } from '@material-ui/icons';
+} from '@mui/material';
+import Checkbox from '@mui/material/Checkbox/Checkbox';
+import { ArrowForward, Search, Edit } from '@mui/icons-material';
 import React, {
   isValidElement,
   useCallback,
@@ -653,7 +653,7 @@ function DataTable<T extends DataTableRecord>({
                 {options?.select?.enabled && <TableCell padding="checkbox" />}
                 {columns.map(({ name, title }) => (
                   <TableCell
-                    key={`table-column-${name}`}
+                    key={`table-column-${String(name)}`}
                     onClick={() => {
                       if (options?.sort?.enabled) {
                         sortByKey(name.toString());
@@ -725,7 +725,7 @@ function DataTable<T extends DataTableRecord>({
                       ({ rendering, style, name, getRenderedEntry }, j) => (
                         <TableCell
                           className={style}
-                          key={`table-body-${name}-${j}`}
+                          key={`table-body-${String(name)}-${j}`}
                         >
                           {renderEntry({
                             render: rendering?.disableTable

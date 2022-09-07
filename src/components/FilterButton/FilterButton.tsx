@@ -9,8 +9,8 @@ import type {
 } from '../../models/datatable';
 import { countFilters, createFilters } from '../../utils/datatable';
 import FilterModal from '../FilterModal/FilterModal';
-import { Tooltip, IconButton, Badge } from '@material-ui/core';
-import { Tune } from '@material-ui/icons';
+import { Tooltip, IconButton, Badge } from '@mui/material';
+import { Tune } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { useDeepCompareEffectNoCheck } from 'use-deep-compare-effect';
 

@@ -1,8 +1,8 @@
-import { Box, TextField } from '@material-ui/core';
-import { DatePicker, DateTimePicker, TimePicker } from '@material-ui/lab';
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import moment from 'moment';
+import { Box, TextField, TextFieldProps } from '@mui/material';
+import { DatePicker, DateTimePicker, TimePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import dayjs from 'dayjs';
 import React from 'react';
 
 type Range = [number | null, number | null];
@@ -103,7 +103,7 @@ export default function RangePicker({
                 if (newMin !== null) {
                   newMin =
                     mode === 'date'
-                      ? moment(newMin).startOf('day').toDate().getTime()
+                      ? dayjs(newMin).startOf('day').toDate().getTime()
                       : new Date(newMin).getTime();
                 }
                 const newMax =
@@ -111,12 +111,12 @@ export default function RangePicker({
                   maxValueNumber === null
                     ? null
                     : mode === 'date'
-                    ? moment(maxValueNumber).endOf('day').toDate().getTime()
+                    ? dayjs(maxValueNumber).endOf('day').toDate().getTime()
                     : maxValueNumber;
                 let newRange: Range = [null, null];
                 if (
                   newMin !== null &&
-                  ((newMax !== null && moment(newMin).isAfter(newMax)) ||
+                  ((newMax !== null && dayjs(newMin).isAfter(newMax)) ||
                     newMax === null)
                 ) {
                   newRange = [newMin, newMin];
@@ -125,7 +125,7 @@ export default function RangePicker({
                 }
                 onChange?.(newRange);
               }}
-              renderInput={(inputProps) => (
+              renderInput={(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
                 <TextField
                   {...inputProps}
                   error={Boolean(touched && errors?.start)}
@@ -174,7 +174,7 @@ export default function RangePicker({
                 if (newMax !== null) {
                   newMax =
                     mode === 'date'
-                      ? moment(newMax).endOf('day').toDate().getTime()
+                      ? dayjs(newMax).endOf('day').toDate().getTime()
                       : new Date(newMax).getTime();
                 }
                 let newRange: Range = [null, null];
@@ -183,12 +183,12 @@ export default function RangePicker({
                   minValueNumber === null
                     ? null
                     : mode === 'date'
-                    ? moment(minValueNumber).startOf('day').toDate().getTime()
+                    ? dayjs(minValueNumber).startOf('day').toDate().getTime()
                     : minValueNumber;
                 if (
                   newMin !== null &&
                   newMax !== null &&
-                  moment(newMax).isBefore(newMin)
+                  dayjs(newMax).isBefore(newMin)
                 ) {
                   newRange = [newMax, newMax];
                 } else {
@@ -196,7 +196,7 @@ export default function RangePicker({
                 }
                 onChange?.(newRange);
               }}
-              renderInput={(inputProps) => (
+              renderInput={(inputProps: JSX.IntrinsicAttributes & TextFieldProps) => (
                 <TextField
                   {...inputProps}
                   error={Boolean(touched && errors?.end)}
